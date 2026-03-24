@@ -5,14 +5,36 @@ body {
 }
 
 .dashboard {
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 20px;
 }
 
+.title {
+    background: linear-gradient(9deg, #de098a, #7e30da);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+}
+
+nav{
+    display: flex;
+    gap: 55px;
+    justify-content: center;
+    align-items: center;
+    border-color: #4169E1;
+
+}
+
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+h2 {
+    background: linear-gradient(9deg, #2a4978, #62dcd4 );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 17px;
 }
 
 .weekHeader {
