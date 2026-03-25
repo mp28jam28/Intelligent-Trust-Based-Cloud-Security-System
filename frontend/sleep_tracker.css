@@ -136,3 +136,11 @@ button:hover {
     opacity: 0.85;
 }
 
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a:last-child {
+    margin-left: auto;
+}
