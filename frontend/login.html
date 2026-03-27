@@ -2,22 +2,34 @@
 <html>
 <head>
     <title>Login - StudentSiesta</title>
+
     <link rel="stylesheet" href="sleep_tracker.css">
     <link rel="stylesheet" href="login.css">
-</head>
-<body>
-    <nav>
-        <div class="title">
-            <h1>StudentSiesta</h1>
-        </div>
-        <a href="homepage.html"><button class="tab">Home</button></a>
-        <a href="log_sleep.html"><button class="tab">Log Sleep</button></a>
-        <a href="insights.html"><button class="tab">Insights</button></a>
-        <a href="login.html"><button class="tab active">Login</button></a>
-    </nav>
 
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+<nav>
+    <div class="title">
+        <h1>StudentSiesta</h1>
+    </div>
+
+    <a href="homepage.html"><button class="tab">Home</button></a>
+    <a href="log_sleep.html"><button class="tab">Log Sleep</button></a>
+    <a href="insights.html"><button class="tab">Insights</button></a>
+    <a href="login.html"><button class="tab active">Login</button></a>
+</nav>
+
+
+
+<div class="login-container">
+
+    
     <div class="login-wrapper">
         <form id="loginForm">
+
             <div class="imgcontainer">
                 <img src="img_avatar2.png" alt="Avatar" class="avatar">
             </div>
@@ -40,7 +52,66 @@
                 <button type="button" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
+
         </form>
     </div>
+
+
+    
+    <div class="google-login">
+
+        <p style="color:white;">OR</p>
+
+        <div id="g_id_onload"
+             data-client_id="782546214154-h0hfh6hok20k3vk839hm2b0j2p29r7vr.apps.googleusercontent.com"
+             data-context="signin"
+             data-ux_mode="popup"
+             data-callback="handleCredentialResponse">
+        </div>
+
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="signin_with"
+             data-shape="rectangular">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function handleCredentialResponse(response) {
+
+    console.log("Encoded JWT ID token: " + response.credential);
+
+    const user = parseJwt(response.credential);
+
+    console.log("User email:", user.email);
+    console.log("User name:", user.name);
+
+    alert("Logged in as " + user.email);
+
+}
+
+function parseJwt(token) {
+
+    const base64Url = token.split('.')[1];
+
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+
+}
+
+</script>
+
 </body>
 </html>
