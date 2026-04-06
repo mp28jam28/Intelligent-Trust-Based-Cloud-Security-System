@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudentSiesta</title>
+    <link rel="stylesheet" href="../css/sleep_tracker.css">
+</head>
+<body>
+    <nav>
+        <div class=title>
+            <h1>StudentSiesta</h1>
+        </div>
+        <a href="homepage.html"><button class="tab active">Home</button></a>
+        <a href="log_sleep.html"><button class="tab" id="logTab">Log Sleep</button></a>
+        <a href="schedule.html"><button class="tab" id="scheduleTab">Schedule</button></a>
+        <a href="insights.html"><button class="tab" id="insightsTab">Insights</button></a>
+        <a href="login.html"><button class="tab">Login</button></a>
+    </nav>
+
+     <div id="sleep-goal-setter" class="goal-setter">
+        <h3>Sleep Goal Settings</h3>
+
+            <div>Set your target sleep</div>
+            <div class="scroll-container" id="sleepGoal">
+                <input type="range" min="2" max="17" value="5" step="0.5">
+                <div class="preferred-hours" id="goal-value">Hours</div>
+            </div>
+        <button type="submit">Set Goal</button>
+
+    </div>        
+        <p id="statusMessage"></p>
+    </div>
+
+    <script src="../js/insights.js"></script>
+</body>
+</html>
