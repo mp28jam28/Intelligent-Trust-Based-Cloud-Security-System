@@ -17,11 +17,11 @@
     </nav>
 
      <div id="sleep-goal-setter" class="goal-setter">
-        <h3>Daily Sleep Goal</h3>
+        <h3>Daily Sleep Goal ⚙️</h3>
             <div class="goal-description">Set your target sleep duration.</div>
             <div class="scroll-container" id="sleepGoal">
                 <input type="range" id="sleepGoalInput" min="5" max="12" value="8.5" step="0.5">
-                <div class="preferred-hours" id="goal-value">8.5 Hours</div>
+                <div class="preferred-hours" id="goal-value">8 Hours</div>
             </div>
         <div class="sleep-reference">
             <div class="ref-item">
@@ -43,6 +43,21 @@
         </script>
 
         <p class= "goalStatusMessage" id="statusMessage"></p>
+    </div>
+
+    <div class="sleep-tips">
+        <h3>Tips to Reach Your <span id="tips-goal">8</span> - Hour Goal 🌙</h3>
+        <div class="bedtime-banner">
+            <div class="bedtime-label">RECOMMENDED BEDTIME</div>
+            <div class="bedtime-time" id="bedtime-suggestion">Go to bed at <span class="bedtime-color">12:00 AM </span></div>
+            <div class="bedtime-wake" id="wake-suggestion">to wake up at 8:00 AM</div>
+        </div>
+        <ul class="tips-list">
+            <li>Create a consistent sleep schedule, even on weekends</li>
+            <li>Avoid screens 1 hour before bedtime</li>
+            <li>Keep your room cool (65-68°F) and dark</li>
+            <li>Limit caffeine after 2 PM</li>
+        </ul>
     </div>
     <script src="../js/insights.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
