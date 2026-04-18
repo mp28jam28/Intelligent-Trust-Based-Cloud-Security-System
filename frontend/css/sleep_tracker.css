@@ -168,6 +168,46 @@ button:hover {
       font-size: 14px;
       margin-bottom: 16px;
   }
+.goalStatusMessage {
+    display: flex;
+    justify-content: space-around;
+    color: #aaa;
+}
+
+.sleep-reference {
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(to right, rgb(15, 10, 70), rgb(60, 20, 100));
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.ref-item {
+    text-align: center;
+}
+
+.ref-label {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.ref-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.ref-value.recommended {
+    color: #7b6ef6;
+}
+
+.ref-sublabel {
+    color: #aaa;
+    font-size: 13px;
+    margin-top: 4px;
+}
 
 
   

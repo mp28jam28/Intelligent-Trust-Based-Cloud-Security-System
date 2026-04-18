@@ -23,13 +23,28 @@
                 <input type="range" id="sleepGoalInput" min="5" max="12" value="8.5" step="0.5">
                 <div class="preferred-hours" id="goal-value">8.5 Hours</div>
             </div>
-        <button type="submit">Set Goal</button>
-        <p id="statusMessage"></p>
+        <div class="sleep-reference">
+            <div class="ref-item">
+                <div class="ref-label">Minimum</div>
+                <div class="ref-value">7 hrs</div>
+            </div>
+            <div class="ref-item">
+                <div class="ref-label">Recommended</div>
+                <div class="ref-value recommended">8-9 hrs</div>
+            </div>
+            <div class="ref-item">
+                <div class="ref-label">Optimal</div>
+                <div class="ref-value">9 hrs</div>
+            </div>
+        </div>
+        <button type="button" id="setGoalBtn">Set Goal</button>
+        <script>
+            document.getElementById('setGoalBtn').onclick = () => confetti();
+        </script>
 
-    </div>        
-        <p id="statusMessage"></p>
+        <p class= "goalStatusMessage" id="statusMessage"></p>
     </div>
-
     <script src="../js/insights.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
