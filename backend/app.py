@@ -42,16 +42,15 @@ def add_sleep():
     if not user:
         return jsonify({"error": "Not logged in"}), 401
 
-    user_email = user["email"]
+    user_id = user["user_id"]
 
     data = request.get_json()
 
     date = data.get("date")
     bedtime = data.get("bedtime")
     wake_time = data.get("wake_time")
-    quality_rating = data.get("quality_rating")
 
-    if not all([date, bedtime, wake_time, quality_rating]):
+    if not all([date, bedtime, wake_time]):
         return jsonify({"error": "Missing required fields"}), 400
 
     try:
@@ -61,11 +60,13 @@ def add_sleep():
         cursor = connection.cursor()
 
         query = """
-        INSERT INTO sleep_data (user_email,date, bedtime, wake_time, duration_hours, quality_rating)
-        VALUES (%s, %s, %s, %s, %s,%s)
+        INSERT INTO Sleep_Log (user_id, log_date, sleep_time, wake_time, duration_hours)
+        VALUES (%s, %s, %s, %s, %s)
         """
-        values = (user_email,date, bedtime, wake_time, duration_hours, quality_rating)
-        print("LOGGED IN USER:", user_email)
+
+        values = (user_id, date, bedtime, wake_time, duration_hours)
+
+        print("LOGGED IN USER ID:", user_id)
         print("VALUES BEING INSERTED:", values)
 
         cursor.execute(query, values)
@@ -88,30 +89,28 @@ def get_sleep_data():
     if not user:
         return jsonify({"error": "Not logged in"}), 401
 
-    user_email = user["email"]
-
+    user_id = user["user_id"]
 
     try:
-    
         connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
 
         cursor.execute("""
-            SELECT date, bedtime, wake_time, duration_hours, quality_rating
-            FROM sleep_data
-            WHERE user_email = %s
-            ORDER BY date ASC
-        """,(user_email,))
+            SELECT log_date, sleep_time, wake_time, duration_hours
+            FROM Sleep_Log
+            WHERE user_id = %s
+            ORDER BY log_date ASC
+        """, (user_id,))
+
         rows = cursor.fetchall()
 
         cleaned_rows = []
         for row in rows:
             cleaned_rows.append({
-                "date": str(row["date"]),
-                "bedtime": str(row["bedtime"]),
+                "date": str(row["log_date"]),
+                "bedtime": str(row["sleep_time"]),
                 "wake_time": str(row["wake_time"]),
-                "duration_hours": float(row["duration_hours"]),
-                "quality_rating": int(row["quality_rating"])
+                "duration_hours": float(row["duration_hours"])
             })
 
         cursor.close()
@@ -144,16 +143,45 @@ def google_login():
         name = idinfo.get("name")
         sub = idinfo.get("sub")
 
+        connection = get_db_connection()
+        cursor = connection.cursor(dictionary=True)
+
+        # check if user already exists
+        cursor.execute("SELECT user_id, username, email FROM User WHERE email = %s", (email,))
+        user_row = cursor.fetchone()
+
+        # if user does not exist, create them
+        if not user_row:
+            cursor.execute(
+                """
+                INSERT INTO User (username, email, password)
+                VALUES (%s, %s, %s)
+                """,
+                (name, email, "GOOGLE_AUTH")
+            )
+            connection.commit()
+
+            user_id = cursor.lastrowid
+            username = name
+        else:
+            user_id = user_row["user_id"]
+            username = user_row["username"]
+
+        cursor.close()
+        connection.close()
+
         session["user"] = {
+            "user_id": user_id,
             "email": email,
-            "name": name,
+            "name": username,
             "google_id": sub
         }
 
         return jsonify({
             "message": "Login successful",
+            "user_id": user_id,
             "email": email,
-            "name": name
+            "name": username
         }), 200
 
     except Exception as e:
