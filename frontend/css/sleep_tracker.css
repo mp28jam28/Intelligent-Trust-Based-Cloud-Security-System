@@ -276,6 +276,35 @@ button:hover {
     color: white;
 }
 
+.small-bubble-banner {
+    background: rgb(155, 218, 255);
+    height: 80px;
+    width: 29%;
 
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 
-  
+    font-size: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    padding: 10px;
+    color: #aaa;
+    font-weight: bold;
+}
+
+.chronotype-stats {
+    font-size: 32px;
+    padding: 4px;
+    color:#5b3fd4
+}
+
+.chrono-banner {
+    font: italic;
+    font-size: 10px;
+    text-align: left;
+
+    
+}
